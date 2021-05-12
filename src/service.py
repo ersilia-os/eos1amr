@@ -41,25 +41,34 @@ class Model(object):
     def set_framework_dir(self, dest):
         self.framework_dir = os.path.abspath(dest)
 
+    def read_columns(self):
+        self.columns = []
+        with open(os.path.join(self.framework_dir, "columns.txt"), "r") as f:
+            for l in f:
+                l = l.rstrip()
+                if l:
+                    self.columns += [l]
+
     def predict(self, smiles_list):
+        self.read_columns()
         tmp_folder = tempfile.mkdtemp()
         data_file = os.path.join(tmp_folder, self.DATA_FILE)
         feat_file = os.path.join(tmp_folder, self.FEAT_FILE)
         pred_file = os.path.join(tmp_folder, self.PRED_FILE)
         with open(data_file, "w") as f:
-            f.write("smiles" + os.linesep)
+            f.write(",".join(["smiles"] + self.columns) + os.linesep)
             for smiles in smiles_list:
-                f.write(smiles + os.linesep)
+                f.write(",".join([smiles] + ["0"]*len(self.columns)) + os.linesep)
         run_file = os.path.join(tmp_folder, self.RUN_FILE)
         with open(run_file, "w") as f:
-            lines = []
+            lines = ["export KMP_DUPLICATE_LIB_OK=TRUE"]
             lines += [
                 "python {0}/save_features.py --data_path {1} --save_path {2} --features_generator rdkit_2d_normalized --restart".format(
                     self.framework_dir, data_file, feat_file
                 )
             ]
             lines += [
-                "python {0}/predict.py --data_path {1} --features_path {2} --checkpoint_dir {3} --no_features_scaling --output {4}".format(
+                "python {0}/predict.py predict --data_path {1} --features_path {2} --checkpoint_dir {3} --no_features_scaling --output {4}".format(
                     self.framework_dir,
                     data_file,
                     feat_file,
@@ -78,7 +87,11 @@ class Model(object):
             h = next(reader)
             result = []
             for r in reader:
-                result += [{h[1]: float(r[1])}]
+                pred = {}
+                for i, col in enumerate(h):
+                    if i == 0: continue
+                    pred[col] = float(r[i])
+                result += [pred]
         return result
 
 

@@ -88,7 +88,8 @@ def make_predictions(args: Namespace, newest_train_args=None, smiles: List[str] 
     :return: A list of lists of target predictions.
     """
     if args.gpu is not None:
-        torch.cuda.set_device(args.gpu)
+        pass
+        #torch.cuda.set_device(args.gpu)
 
     print('Loading training args')
 
