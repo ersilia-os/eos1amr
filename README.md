@@ -16,5 +16,5 @@ This model has been trained using the BBBP benchmark from MoleculeNet. Molecular
 
 ## History
 1. Model was downloaded on 06.05.21 from [TencentAILab](https://github.com/tencent-ailab/grover)
-2. We duplicated task/predict.py and scripts/save_features from Tencent GitHub repository
+2. We duplicated task/predict.py and scripts/save_features.py from Tencent GitHub repository
 3. Model was incorporated to Ersilia on 11/05/2021
