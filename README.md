@@ -2,6 +2,7 @@
 
 This model has been developed using GROVER, a Graph Neural Network pretrained with 10 million unlabelled molecules from ChEMBL and ZINC15. GROVER has then been fine-tuned to predict Blood Brain Barrier Penetration (BBBP) using the BBBP dataset curated by MoleculeNet. This dataset curates permeability information for 2000 molecules from scientific literature.
 GROVER predictions consistently outperformed other state-of-the-art methods for Lipo and other benchmark datasets from [MoleculeNet](https://pubs.rsc.org/en/content/articlelanding/2018/sc/c7sc02664a#!divAbstract).
+
 ## Summary
 * Predicts **Blood-Brain Barrier Penetration** for small molecules
 * Takes **compound structures** as input
