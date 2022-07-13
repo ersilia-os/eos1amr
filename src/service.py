@@ -1,35 +1,37 @@
+from typing import List
+
 from bentoml import BentoService, api, artifacts
 from bentoml.adapters import JsonInput
 from bentoml.types import JsonSerializable
-from typing import List
-
-import shutil
-import os
-import csv
-import tempfile
-import subprocess
-import pickle
-
 from bentoml.service import BentoServiceArtifact
 
-CHECKPOINTS_BASEDIR = "BBBPbase"
+import pickle
+import os
+import shutil
+import tempfile
+import subprocess
+import csv
+
+CHECKPOINTS_BASEDIR = "checkpoints"
 FRAMEWORK_BASEDIR = "framework"
-
-MODEL_NAME = "model"
-
 
 def load_model(framework_dir, checkpoints_dir):
     mdl = Model()
     mdl.load(framework_dir, checkpoints_dir)
     return mdl
 
-
+def Float(x):
+    try:
+        return float(x)
+    except:
+        return None
+    
 class Model(object):
     def __init__(self):
-        self.DATA_FILE = "data.csv"
-        self.FEAT_FILE = "features.npz"
-        self.PRED_FILE = "pred.csv"
-        self.RUN_FILE = "run.sh"
+        self.DATA_FILE = "_data.csv"
+        self.PRED_FILE = "_pred.csv"
+        self.RUN_FILE = "_run.sh"
+        self.LOG_FILE = "_run.log"
 
     def load(self, framework_dir, checkpoints_dir):
         self.framework_dir = framework_dir
@@ -41,63 +43,41 @@ class Model(object):
     def set_framework_dir(self, dest):
         self.framework_dir = os.path.abspath(dest)
 
-    def read_columns(self):
-        self.columns = []
-        with open(os.path.join(self.framework_dir, "columns.txt"), "r") as f:
-            for l in f:
-                l = l.rstrip()
-                if l:
-                    self.columns += [l]
-
     def predict(self, smiles_list):
-        self.read_columns()
-        tmp_folder = tempfile.mkdtemp()
+        tmp_folder = tempfile.mkdtemp(prefix="eos-")
         data_file = os.path.join(tmp_folder, self.DATA_FILE)
-        feat_file = os.path.join(tmp_folder, self.FEAT_FILE)
         pred_file = os.path.join(tmp_folder, self.PRED_FILE)
+        log_file = os.path.join(tmp_folder, self.LOG_FILE)
         with open(data_file, "w") as f:
-            f.write(",".join(["smiles"] + self.columns) + os.linesep)
             for smiles in smiles_list:
-                f.write(",".join([smiles] + ["0"]*len(self.columns)) + os.linesep)
+                f.write(smiles + os.linesep)
         run_file = os.path.join(tmp_folder, self.RUN_FILE)
         with open(run_file, "w") as f:
-            lines = ["export KMP_DUPLICATE_LIB_OK=TRUE"]
-            lines += [
-                "python {0}/save_features.py --data_path {1} --save_path {2} --features_generator rdkit_2d_normalized --restart".format(
-                    self.framework_dir, data_file, feat_file
-                )
-            ]
-            lines += [
-                "python {0}/predict.py predict --data_path {1} --features_path {2} --checkpoint_dir {3} --no_features_scaling --output {4}".format(
-                    self.framework_dir,
-                    data_file,
-                    feat_file,
-                    self.checkpoints_dir,
-                    pred_file,
-                )
-            ]
+            lines = ["python {0}/grover/main.py {1} {2}".format(self.framework_dir, data_file, pred_file)] 
             f.write(os.linesep.join(lines))
         cmd = "bash {0}".format(run_file)
-        with open(os.devnull, "w") as fp:
+        with open(log_file, "w") as fp:
             subprocess.Popen(
                 cmd, stdout=fp, stderr=fp, shell=True, env=os.environ
             ).wait()
         with open(pred_file, "r") as f:
             reader = csv.reader(f)
-            h = next(reader)
-            result = []
+            h = next(reader)[1:]
+            h = [c.upper().replace(",", "").replace("(", "").replace(")", "") for c in h]
+            R = []
             for r in reader:
-                pred = {}
-                for i, col in enumerate(h):
-                    if i == 0: continue
-                    pred[col] = float(r[i])
-                result += [pred]
+                R += [{"outcomes": [Float(x) for x in r[1:]]}]
+        meta = {
+            "outcomes": h
+        }
+        result = {
+            'result': R,
+            'meta': meta
+        }
         return result
 
 
 class Artifact(BentoServiceArtifact):
-    """Dummy  artifact to deal with file locations of checkpoints"""
-
     def __init__(self, name):
         super(Artifact, self).__init__(name)
         self._model = None
@@ -144,11 +124,11 @@ class Artifact(BentoServiceArtifact):
         pickle.dump(self._model, open(self._model_file_path(dst), "wb"))
 
 
-@artifacts([Artifact(MODEL_NAME)])
+@artifacts([Artifact("model")])
 class Service(BentoService):
     @api(input=JsonInput(), batch=True)
     def predict(self, input: List[JsonSerializable]):
-        input=input[0]
-        smiles_list=[inp["input"] for inp in input]
+        input = input[0]
+        smiles_list = [inp["input"] for inp in input]
         output = self.artifacts.model.predict(smiles_list)
-        return[output]
+        return [output]
