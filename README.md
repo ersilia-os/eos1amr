@@ -1,22 +1,40 @@
-# Blood-Brain Barrier Penetration
+# Blood-brain barrier penetration
 
-This model has been developed using GROVER, a Graph Neural Network pretrained with 10 million unlabelled molecules from ChEMBL and ZINC15. GROVER has then been fine-tuned to predict Blood Brain Barrier Penetration (BBBP) using the BBBP dataset curated by MoleculeNet. This dataset curates permeability information for 2000 molecules from scientific literature.
-GROVER predictions consistently outperformed other state-of-the-art methods for Lipo and other benchmark datasets from [MoleculeNet](https://pubs.rsc.org/en/content/articlelanding/2018/sc/c7sc02664a#!divAbstract).
+This model predicts the Blood-Brain Barrier (BBB) penetration potential of small molecules using as training data the curated MoleculeNet benchmark containing 2000 experimental data points. It has been trained using the GROVER transformer (see eos7w6n or grover-embedding for a detail of the molecular featurization step with GROVER). 
 
-## Summary
-* Predicts **Blood-Brain Barrier Penetration** for small molecules
-* Takes **compound structures** as input
-* Trained with the benchmark **BBBP MoleculeNet** dataset (2039 molecules)
-* Results validated **in-silico** against baseline methods for the same dataset
-* Published in [*Rong et al, Advances in Neural Information Processing Systems 2020*](https://papers.nips.cc/paper/2020/hash/94aef38441efa3380a3bed3faf1f9d5d-Abstract.html)
-* Processed data can be found [here](https://github.com/tencent-ailab/grover)
+## Identifiers
 
-## Specifications
-* Input: SMILES string (also accepts an InChIKey string or a molecule name string, and converts them to SMILES)
-* Endpoint: BBB permeability
-* Results interpretation: 0: not permeable - 1: highly permeable
+* EOS model ID: `eos1amr`
+* Slug: `grover-bbbp`
 
-## History
-1. Model was downloaded on 06.05.21 from [TencentAILab](https://github.com/tencent-ailab/grover)
-2. We duplicated task/predict.py and scripts/save_features.py from Tencent GitHub repository
-3. Model was incorporated to Ersilia on 11/05/2021
+## Characteristics
+
+* Input: `Compound`
+* Input Shape: `Single`
+* Task: `Classification`
+* Output: `Probability`
+* Output Type: `Float`
+* Output Shape: `Single`
+* Interpretation: Probability that a molecule crosses the blood brain barrier
+
+## References
+
+* [Publication](https://papers.nips.cc/paper/2020/hash/94aef38441efa3380a3bed3faf1f9d5d-Abstract.html)
+* [Source Code](https://github.com/tencent-ailab/grover)
+* Ersilia contributor: [Amna-28](https://github.com/Amna-28)
+
+## Citation
+
+If you use this model, please cite the [original authors](https://papers.nips.cc/paper/2020/hash/94aef38441efa3380a3bed3faf1f9d5d-Abstract.html) of the model and the [Ersilia Model Hub](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff).
+
+## License
+
+This package is licensed under a GPL-3.0 license. The model contained within this package is licensed under a MIT license.
+
+Notice: Ersilia grants access to these models 'as is' provided by the original authors, please refer to the original code repository and/or publication if you use the model in your research.
+
+## About Us
+
+The [Ersilia Open Source Initiative](https://ersilia.io) is a Non Profit Organization ([1192266](https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/5170657/full-print)) with the mission is to equip labs, universities and clinics in LMIC with AI/ML tools for infectious disease research.
+
+[Help us](https://www.ersilia.io/donate) achieve our mission!
