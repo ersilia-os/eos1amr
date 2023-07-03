@@ -23,6 +23,9 @@ This model predicts the Blood-Brain Barrier (BBB) penetration potential of small
 * [Source Code](https://github.com/tencent-ailab/grover)
 * Ersilia contributor: [Amna-28](https://github.com/Amna-28)
 
+## Ersilia model URLs
+* [GitHub](https://github.com/ersilia-os/eos1amr)
+
 ## Citation
 
 If you use this model, please cite the [original authors](https://papers.nips.cc/paper/2020/hash/94aef38441efa3380a3bed3faf1f9d5d-Abstract.html) of the model and the [Ersilia Model Hub](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff).
