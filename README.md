@@ -26,7 +26,7 @@ This model predicts the Blood-Brain Barrier (BBB) penetration potential of small
 ## Ersilia model URLs
 * [GitHub](https://github.com/ersilia-os/eos1amr)
 * [AWS S3](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1amr.zip)
-* [DockerHub](https://hub.docker.com/r/ersiliaos/eos1amr) (AMD64)
+* [DockerHub](https://hub.docker.com/r/ersiliaos/eos1amr) (AMD64, ARM64)
 
 ## Citation
 
