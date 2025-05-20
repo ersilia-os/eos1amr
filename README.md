@@ -2,44 +2,78 @@
 
 This model predicts the Blood-Brain Barrier (BBB) penetration potential of small molecules using as training data the curated MoleculeNet benchmark containing 2000 experimental data points. It has been trained using the GROVER transformer (see eos7w6n or grover-embedding for a detail of the molecular featurization step with GROVER). 
 
-## Identifiers
+This model was incorporated on 2021-06-04.
 
-* EOS model ID: `eos1amr`
-* Slug: `grover-bbbp`
+## Information
+### Identifiers
+- **Ersilia Identifier:** `eos1amr`
+- **Slug:** `grover-bbbp`
 
-## Characteristics
+### Domain
+- **Task:** `Annotation`
+- **Subtask:** `Property calculation or prediction`
+- **Biomedical Area:** `ADMET`
+- **Target Organism:** `Homo sapiens`
+- **Tags:** `Permeability`, `MoleculeNet`, `Chemical graph model`, `Alzheimer`
 
-* Input: `Compound`
-* Input Shape: `Single`
-* Task: `Classification`
-* Output: `Probability`
-* Output Type: `Float`
-* Output Shape: `Single`
-* Interpretation: Probability that a molecule crosses the blood brain barrier
+### Input
+- **Input:** `Compound`
+- **Input Dimension:** `1`
 
-## References
+### Output
+- **Output Dimension:** `1`
+- **Output Consistency:** `Fixed`
+- **Interpretation:** Probability that a molecule crosses the blood brain barrier
 
-* [Publication](https://papers.nips.cc/paper/2020/hash/94aef38441efa3380a3bed3faf1f9d5d-Abstract.html)
-* [Source Code](https://github.com/tencent-ailab/grover)
-* Ersilia contributor: [Amna-28](https://github.com/Amna-28)
+Below are the **Output Columns** of the model:
+| Name | Type | Direction | Description |
+|------|------|-----------|-------------|
+| p_np | float | high | Probability of blood-brain barrier penetration |
 
-## Ersilia model URLs
-* [GitHub](https://github.com/ersilia-os/eos1amr)
-* [AWS S3](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1amr.zip)
-* [DockerHub](https://hub.docker.com/r/ersiliaos/eos1amr) (AMD64, ARM64)
 
-## Citation
+### Source and Deployment
+- **Source:** `Local`
+- **Source Type:** `External`
+- **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos1amr](https://hub.docker.com/r/ersiliaos/eos1amr)
+- **Docker Architecture:** `AMD64`, `ARM64`
+- **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1amr.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1amr.zip)
 
-If you use this model, please cite the [original authors](https://papers.nips.cc/paper/2020/hash/94aef38441efa3380a3bed3faf1f9d5d-Abstract.html) of the model and the [Ersilia Model Hub](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff).
+### Resource Consumption
 
-## License
 
-This package is licensed under a GPL-3.0 license. The model contained within this package is licensed under a MIT license.
+### References
+- **Source Code**: [https://github.com/tencent-ailab/grover](https://github.com/tencent-ailab/grover)
+- **Publication**: [https://arxiv.org/abs/2007.02835](https://arxiv.org/abs/2007.02835)
+- **Publication Type:** `Peer reviewed`
+- **Publication Year:** `2020`
+- **Ersilia Contributor:** [Amna-28](https://github.com/Amna-28)
 
-Notice: Ersilia grants access to these models 'as is' provided by the original authors, please refer to the original code repository and/or publication if you use the model in your research.
+### License
+This package is licensed under a [GPL-3.0](https://github.com/ersilia-os/ersilia/blob/master/LICENSE) license. The model contained within this package is licensed under a [MIT](LICENSE) license.
 
-## About Us
+**Notice**: Ersilia grants access to models _as is_, directly from the original authors, please refer to the original code repository and/or publication if you use the model in your research.
 
-The [Ersilia Open Source Initiative](https://ersilia.io) is a Non Profit Organization ([1192266](https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/5170657/full-print)) with the mission is to equip labs, universities and clinics in LMIC with AI/ML tools for infectious disease research.
 
-[Help us](https://www.ersilia.io/donate) achieve our mission!
+## Use
+To use this model locally, you need to have the [Ersilia CLI](https://github.com/ersilia-os/ersilia) installed.
+The model can be **fetched** using the following command:
+```bash
+# fetch model from the Ersilia Model Hub
+ersilia fetch eos1amr
+```
+Then, you can **serve**, **run** and **close** the model as follows:
+```bash
+# serve the model
+ersilia serve eos1amr
+# generate an example file
+ersilia example -n 3 -f my_input.csv
+# run the model
+ersilia run -i my_input.csv -o my_output.csv
+# close the model
+ersilia close
+```
+
+## About Ersilia
+The [Ersilia Open Source Initiative](https://ersilia.io) is a tech non-profit organization fueling sustainable research in the Global South.
+Please [cite](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff) the Ersilia Model Hub if you've found this model to be useful. Always [let us know](https://github.com/ersilia-os/ersilia/issues) if you experience any issues while trying to run it.
+If you want to contribute to our mission, consider [donating](https://www.ersilia.io/donate) to Ersilia!
