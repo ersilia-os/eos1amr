@@ -8,8 +8,8 @@ from multiprocessing import Pool
 import tqdm
 from rdkit import Chem
 
-from grover.data.task_labels import atom_to_vocab
-from grover.data.task_labels import bond_to_vocab
+from grover.grover.data.task_labels import atom_to_vocab
+from grover.grover.data.task_labels import bond_to_vocab
 
 
 class TorchVocab(object):

@@ -11,8 +11,8 @@ import numpy as np
 from rdkit import Chem
 from torch.utils.data.dataset import Dataset
 
-from grover.data.molfeaturegenerator import get_features_generator
-from grover.data.scaler import StandardScaler
+from grover.grover.data.molfeaturegenerator import get_features_generator
+from grover.grover.data.scaler import StandardScaler
 
 
 class MoleculeDatapoint:

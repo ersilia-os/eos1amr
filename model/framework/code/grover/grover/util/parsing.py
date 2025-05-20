@@ -8,8 +8,8 @@ from tempfile import TemporaryDirectory
 
 import torch
 
-from grover.data.molfeaturegenerator import get_available_features_generators
-from grover.util.utils import makedirs
+from grover.grover.data.molfeaturegenerator import get_available_features_generators
+from grover.grover.util.utils import makedirs
 
 
 def add_common_args(parser: ArgumentParser):

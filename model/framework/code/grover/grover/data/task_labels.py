@@ -8,7 +8,7 @@ import numpy as np
 from rdkit import Chem
 from descriptastorus.descriptors import rdDescriptors
 
-from grover.data.molfeaturegenerator import register_features_generator
+from grover.grover.data.molfeaturegenerator import register_features_generator
 
 Molecule = Union[str, Chem.Mol]
 FeaturesGenerator = Callable[[Molecule], np.ndarray]

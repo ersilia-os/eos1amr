@@ -10,10 +10,10 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 
-from grover.data import MolCollator
-from grover.data import MoleculeDataset
-from grover.data import StandardScaler
-from grover.util.utils import get_data, get_data_from_smiles, create_logger, load_args, get_task_names, tqdm, \
+from grover.grover.data import MolCollator
+from grover.grover.data import MoleculeDataset
+from grover.grover.data import StandardScaler
+from grover.grover.util.utils import get_data, get_data_from_smiles, create_logger, load_args, get_task_names, tqdm, \
     load_checkpoint, load_scalars
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")

@@ -8,9 +8,9 @@ import numpy as np
 import torch
 from torch import nn as nn
 
-from grover.data import get_atom_fdim, get_bond_fdim
-from grover.model.layers import Readout, GTransEncoder
-from grover.util.nn_utils import get_activation_function
+from grover.grover.data import get_atom_fdim, get_bond_fdim
+from grover.grover.model.layers import Readout, GTransEncoder
+from grover.grover.util.nn_utils import get_activation_function
 
 
 class GROVEREmbedding(nn.Module):
