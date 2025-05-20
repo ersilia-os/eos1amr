@@ -2,7 +2,7 @@
 
 This model predicts the Blood-Brain Barrier (BBB) penetration potential of small molecules using as training data the curated MoleculeNet benchmark containing 2000 experimental data points. It has been trained using the GROVER transformer (see eos7w6n or grover-embedding for a detail of the molecular featurization step with GROVER). 
 
-This model was incorporated on 2021-06-04.
+This model was incorporated on 2021-05-07.
 
 ## Information
 ### Identifiers
@@ -39,6 +39,8 @@ Below are the **Output Columns** of the model:
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1amr.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1amr.zip)
 
 ### Resource Consumption
+- **Model Size (Mb):** `1404`
+- **Environment Size (Mb):** `2410`
 
 
 ### References
