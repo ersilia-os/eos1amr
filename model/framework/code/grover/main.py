@@ -52,13 +52,14 @@ def smiles_to_dataframe(txt_file_path):
     for n in names:
         df[n] = dummy_labels.values
 
-    input_csv_path = txt_file_path.split(".")[0] + ".csv"
+    tmp_fd, input_csv_path = tempfile.mkstemp(suffix=".csv")
+    os.close(tmp_fd)
     df.to_csv(input_csv_path, index=False)
 
     return input_csv_path
 
 
-tmp_folder = tempfile.mktemp()
+tmp_folder = tempfile.mkdtemp()
 features_path = os.path.join(tmp_folder, "features.npz")
 
 
