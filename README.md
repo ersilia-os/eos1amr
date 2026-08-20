@@ -1,6 +1,6 @@
 # Blood-brain barrier penetration
 
-Scores how likely a compound is to reach the central nervous system by crossing the blood-brain barrier, the property that most often decides whether a neuroactive candidate is viable. The BBBP benchmark from MoleculeNet supplied roughly 2,000 experimentally labelled compounds. Predictions come from a graph transformer pretrained on 10 million unlabelled molecules and then fine-tuned on this endpoint. Labels are binary and were assembled from heterogeneous literature sources, so the model reports a tendency rather than a measured permeability.
+This model predicts the Blood-Brain Barrier (BBB) penetration potential of small molecules using as training data the curated MoleculeNet benchmark containing 2000 experimental data points. It has been trained using the GROVER transformer (see eos7w6n or grover-embedding for a detail of the molecular featurization step with GROVER). 
 
 This model was incorporated on 2021-05-07.Last packaged on 2026-03-10.
 
@@ -23,7 +23,7 @@ This model was incorporated on 2021-05-07.Last packaged on 2026-03-10.
 ### Output
 - **Output Dimension:** `1`
 - **Output Consistency:** `Fixed`
-- **Interpretation:** Probability that the compound penetrates the blood-brain barrier.
+- **Interpretation:** Probability that a molecule crosses the blood brain barrier
 
 Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |
