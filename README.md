@@ -1,6 +1,6 @@
 # Blood-brain barrier penetration
 
-Scores how likely a compound is to reach the central nervous system by crossing the blood-brain barrier, the property that most often decides whether a neuroactive candidate is viable. The BBBP benchmark from MoleculeNet supplied roughly 2,000 experimentally labelled compounds. Predictions come from a graph transformer pretrained on 10 million unlabelled molecules and then fine-tuned on this endpoint. Labels are binary and were assembled from heterogeneous literature sources, so the model reports a tendency rather than a measured permeability.
+Scores how likely a compound is to reach the central nervous system by crossing the blood-brain barrier, the property that most often decides whether a neuroactive candidate is viable. The BBBP benchmark from MoleculeNet supplied 2,039 labelled compounds for fine-tuning a graph transformer pretrained on 10 million unlabelled molecules, and three fine-tuned folds are averaged per prediction. Labels are binary and were assembled from heterogeneous literature sources, so the output is a tendency to permeate rather than a measured permeability.
 
 This model was incorporated on 2021-05-07.Last packaged on 2026-03-10.
 
