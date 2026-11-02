@@ -3,7 +3,7 @@
 Scores how likely a compound is to reach the central nervous system by crossing the blood-brain barrier, the property that most often decides whether a neuroactive candidate is viable. The BBBP benchmark from MoleculeNet supplied 2,039 labelled compounds for fine-tuning a graph transformer pretrained on 10 million unlabelled molecules, and three fine-tuned folds are averaged per prediction. Labels are binary and were assembled from heterogeneous literature sources, so the output is a tendency to permeate rather than a measured permeability.
 
 This model was incorporated on 2021-05-07.
-Last packaged on 2026-03-10.
+Last packaged on 2026-11-02.
 
 ## Information
 ### Identifiers
@@ -36,17 +36,17 @@ Below are the **Output Columns** of the model:
 - **Source:** `Local`
 - **Source Type:** `External`
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos1amr](https://hub.docker.com/r/ersiliaos/eos1amr)
-- **Docker Architecture:** `AMD64`
+- **Docker Architecture:** `AMD64`, `ARM64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1amr.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1amr.zip)
 
 ### Resource Consumption
 - **Model Size (Mb):** `1404`
 - **Environment Size (Mb):** `2406`
-- **Image Size (Mb):** `6623.19`
+- **Image Size (Mb):** `3779.48`
 
 **Computational Performance (seconds):**
-- 10 inputs: `35.37`
-- 100 inputs: `160.85`
+- 10 inputs: `31.68`
+- 100 inputs: `158.16`
 - 10000 inputs: `-1`
 
 ### References
