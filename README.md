@@ -3,7 +3,7 @@
 Scores how likely a compound is to reach the central nervous system by crossing the blood-brain barrier, the property that most often decides whether a neuroactive candidate is viable. The BBBP benchmark from MoleculeNet supplied 2,039 labelled compounds for fine-tuning a graph transformer pretrained on 10 million unlabelled molecules, and three fine-tuned folds are averaged per prediction. Labels are binary and were assembled from heterogeneous literature sources, so the output is a tendency to permeate rather than a measured permeability.
 
 This model was incorporated on 2021-05-07.
-Last packaged on 2026-11-02.
+Last packaged on 2026-11-16.
 
 ## Information
 ### Identifiers
@@ -42,11 +42,11 @@ Below are the **Output Columns** of the model:
 ### Resource Consumption
 - **Model Size (Mb):** `1404`
 - **Environment Size (Mb):** `2406`
-- **Image Size (Mb):** `3779.48`
+- **Image Size (Mb):** `2332.91`
 
 **Computational Performance (seconds):**
-- 10 inputs: `31.68`
-- 100 inputs: `158.16`
+- 10 inputs: `34.16`
+- 100 inputs: `159.8`
 - 10000 inputs: `-1`
 
 ### References
